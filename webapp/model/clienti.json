@@ -1,0 +1,66 @@
+{
+
+    "clienti" : [{
+        "id": "01",
+        "assistito": "Anna La Vella",
+        "referente": "Elena Del Vecchio",
+        "eta": "90",
+        "genere": "Donna",
+        "indirizzo": "Via Folgore 18",
+        "cellulare": "3458697945",
+        "cap": "60121",
+        "città": "Ancona",
+        "provincia": "(AN)",
+        "email": "elenadelv@gmail.com",
+        "stato": true
+    },
+    {
+        "id": "02",
+        "assistito": "Stefano Verrocchi",
+        "referente": "Francesco Verrocchi",
+        "eta": "79",
+        "genere": "Uomo",
+        "indirizzo": "Via Dalmazia 30",
+        "cellulare": "3205739573",
+        "cap": "47921",
+        "città": "Rimini",
+        "provincia": "(RN)",
+        "email": "fra83@yahoo.de",
+        "stato": false
+    
+    },
+    {
+        "id": "03",
+        "assistito": "Mara Maionchi",
+        "referente": "Alfredo Pupino",
+        "eta": "79",
+        "genere": "Uomo",
+        "indirizzo": "Via Dalmazia 30",
+        "cellulare": "3205739573",
+        "cap": "47921",
+        "città": "Noicattaro",
+        "provincia": "(BA)",
+        "email": "fra83@yahoo.de",
+        "stato": true
+    
+    },
+    {
+        "id": "04",
+        "assistito": "Raffaella Fastino",
+        "referente": "Francesco Bianchi",
+        "eta": "79",
+        "genere": "Uomo",
+        "indirizzo": "Via Dalmazia 30",
+        "cellulare": "3205739573",
+        "cap": "47921",
+        "città": "Rimini",
+        "provincia": "(RN)",
+        "email": "fra83@yahoo.de",
+        "stato": true
+    }
+    ]
+
+} 
+
+
+    

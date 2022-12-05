@@ -1,0 +1,93 @@
+<mvc:View controllerName="gestioneclienti.gestioneclienti.controller.tabella" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns:m="sap.m" xmlns="sap.ui.table" xmlns:l="sap.ui.layout" xmlns:core='sap.ui.core' xmlns:u="sap.ui.unified">
+    <m:Page showHeader="false">
+        <m:content>
+            <!-- navbar -->
+            <m:Toolbar>
+                <m:content>
+                    <!-- bottone indietro -->
+                    <m:Button text="" icon="sap-icon://nav-back" press="onPress" width="auto" class="sapUiLargeMarginEnd" />
+                    <!-- bottone aggiungi scheda cliente -->
+                    <m:Button text="" icon="sap-icon://add" press="onPress" width="auto" />
+                    <!-- spaziatura -->
+                    <m:ToolbarSpacer width="45%" />
+                    <!-- checkbox inattivi -->
+                    <m:CheckBox text="Includi clienti inattivi" selected="true" class="sapUiMediumMarginEnd" />
+                    <!-- ordina(select) -->
+                    <m:Label text="ordina" labelFor="ordina"  />
+                    <m:Select id="ordina" width="10%">
+                        <m:items>
+                            <core:Item text="recenti" key="recenti"  />
+                            <core:Item text="meno recenti" key="meno recenti" />
+                        </m:items>
+                    </m:Select>
+                    <!-- barra di ricerca -->
+                    <m:SearchField width="15%" search="handleLiveChange" />
+                </m:content>
+            </m:Toolbar>
+
+            <!-- tabella -->
+            <Table id="table1" rows="{ClientiModel>/clienti}" 
+            alternateRowColors="true"  
+            selectionMode = "Single"  
+            rowSelectionChange = "action"
+            visibleRowCount="7"
+            >
+
+                <Column>
+                    <m:Label text="Assistito" />
+                    <template>
+                        <m:VBox>
+                            <m:Text text="{ClientiModel>assistito}" wrapping="false" />
+                            <m:Text text="{ClientiModel>genere} {ClientiModel>eta} anni" wrapping="false" />
+                        </m:VBox>
+                    </template>
+                </Column>
+
+                <Column>
+                    <m:Label text="Referente" />
+                    <template>
+                        <m:VBox>
+                            <m:Text text="{ClientiModel>referente}" wrapping="false" />
+                            <m:Text text="" wrapping="false" />
+                        </m:VBox>
+                    </template>
+                </Column>
+                <Column>
+                    <m:Label text="Contatti" />
+                    <template>
+                        <m:VBox>
+                            <m:Text text="{ClientiModel>cellulare}" wrapping="false" />
+                            <m:Text text="{ClientiModel>email}" wrapping="false" />
+                        </m:VBox>
+                    </template>
+                </Column>
+                <Column>
+                    <m:Label text="Indirizzo" />
+                    <template>
+                        <m:VBox>
+                            <m:Text text="{ClientiModel>indirizzo}" wrapping="false" />
+                            <m:Text text="{ClientiModel>città} {ClientiModel>cap} {ClientiModel>provincia}" wrapping="false" />
+                        </m:VBox>
+                    </template>
+                </Column>
+                <Column width="6rem">
+                    <m:Label text="Stato" />
+                    <template>
+                        <m:ObjectStatus id="idStato" text="{= ${ClientiModel>stato} ? 'Attivo' : 'Inattivo'}" 
+                        inverted="true"  
+                      state="{= ${ClientiModel>stato} ? 'Success' : 'Error'}"
+                        />
+                    </template>
+                </Column>
+                <Column width="3rem">
+                    <m:Label text="" />
+                    <template>
+                        <core:Icon src="sap-icon://show" size="1.4rem" press="vaiAlDettaglio" />
+                    </template>
+                </Column>
+            </Table>
+
+            <m:Button text="vai al dettaglio" press="vaiAlDettaglio" id="buttonVaiAlDettaglio" />
+        </m:content>
+    </m:Page>
+</mvc:View>
