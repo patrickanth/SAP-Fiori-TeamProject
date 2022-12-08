@@ -1,5 +1,5 @@
 <mvc:View
-    controllerName="gestioneclienti.gestioneclienti.controller.dettaglio"
+    controllerName="gestioneclienti.gestioneclienti.controller.creacliente"
     displayBlock="true"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
@@ -18,49 +18,61 @@
                     <Button text="" icon="sap-icon://nav-back" press="onNavBack" width="auto" class="sapUiLargeMarginEnd" />
                 </content>
             </Toolbar>
-            <!-- form -->
-            <f:Form id="DettaglioForm" editable="true" title="{ClientiModel>assistito}">
+             <!-- form -->
+            <f:Form id="FormChange32" editable="true" title="Inserisci nuovo cliente">
                 <f:layout>
-                    <f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="1" emptySpanL="1" emptySpanM="1" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1" singleContainerFullSize="false" />
+                    <f:ResponsiveGridLayout 
+                    labelSpanXL="4" 
+                    labelSpanL="4" 
+                    labelSpanM="4" 
+                    labelSpanS="12" 
+                    adjustLabelSpan="false" 
+                    emptySpanXL="1" 
+                    emptySpanL="1" 
+                    emptySpanM="1" 
+                    emptySpanS="0" 
+                    columnsXL="2" 
+                    columnsL="2" 
+                    columnsM="1" 
+                    singleContainerFullSize="false" />
                 </f:layout>
                 <!-- prima colonna form -->
                 <f:formContainers>
                     <f:FormContainer>
                         <f:formElements>
-                            <f:FormElement label="Genere" id="fieldGenere" visible="true">
+           <f:FormElement label="Assistito">
                                 <f:fields>
-                                    <Input id="genere" type="Text" value="{ClientiModel>genere}" valueStateText="il campo non può essere vuoto" editable="false" />
+                                    <Input id="assistito" type="Text" maxLength="30" valueStateText="il campo non può essere vuoto" editable="true" placeholder="nome cognome "/>
                                 </f:fields>
                             </f:FormElement>
 
-                            <f:FormElement label="Genere" id="fieldRadio" visible="false">
+                            <f:FormElement label="Genere" id="fieldRadio" >
                                 <f:fields>
-                                    <RadioButton id="uomo" groupName="radio" text="Uomo" selected="{= ${ClientiModel>genere}==='Uomo' ? true : false}" />
-                                    <RadioButton id="donna" groupName="radio" text="Donna" selected="{= ${ClientiModel>genere}==='Donna' ? true : false}" />
+                                    <RadioButton id="uomo" groupName="radio" text="Uomo"  />
+                                    <RadioButton id="donna" groupName="radio" text="Donna"  />
                                 </f:fields>
                             </f:FormElement>
-
                             <f:FormElement label="Età">
                                 <f:fields>
-                                    <Input id="eta" type="Number" value="{ClientiModel>eta}" valueStateText="il campo non può essere vuoto" editable="false" />
+                                    <Input id="eta" type="Number" valueStateText="il campo deve essere un numero composto da 12 cifre" editable="true" />
                                 </f:fields>
                             </f:FormElement>
 
                             <f:FormElement label="Indirizzo">
                                 <f:fields>
-                                    <Input id="indirizzo" value="{ClientiModel>indirizzo}" type="Text" placeholder="via, largo, etc" valueStateText="il campo non può essere vuoto" editable="false" />
+                                    <Input id="indirizzo" type="Text" placeholder="via, largo, etc" valueStateText="il campo non può essere vuoto" editable="true" />
                                 </f:fields>
                             </f:FormElement>
 
                             <f:FormElement label="">
                                 <f:fields>
-                                    <Input id="citta" type="Text" value="{ClientiModel>città}" placeholder="città" valueStateText="il campo non può essere vuoto" editable="false" />
+                                    <Input id="citta" type="Text" placeholder="città" valueStateText="il campo non può essere vuoto" editable="true" />
                                 </f:fields>
                             </f:FormElement>
                             <f:FormElement label="">
                                 <f:fields>
-                                    <Input id="cap" type="Text" value="{ClientiModel>cap}" placeholder="cap" valueStateText="il campo non può essere vuoto" editable="false" />
-                                    <Input id="provincia" type="Text" value="{ClientiModel>provincia}" placeholder="provincia" valueStateText="il campo non può essere vuoto" editable="false" />
+                                    <Input id="cap" type="Text" placeholder="cap" valueStateText="il campo non può essere vuoto" editable="true" />
+                                    <Input id="provincia" type="Text" placeholder="provincia" valueStateText="il campo non può essere vuoto" editable="true" />
                                 </f:fields>
                             </f:FormElement>
                         </f:formElements>
@@ -72,41 +84,19 @@
                         <f:formElements>
                             <f:FormElement label="Referente">
                                 <f:fields>
-                                    <Input id="referente" type="Text" value="{ClientiModel>referente}" maxLength="30" valueStateText="il campo non può essere vuoto" editable="false" />
+                                    <Input id="referente" type="Text" maxLength="30" valueStateText="il campo non può essere vuoto" editable="true" placeholder="nome cognome "/>
                                 </f:fields>
                             </f:FormElement>
 
                             <f:FormElement label="E-mail">
                                 <f:fields>
-                                    <Input id="email" type="Email" value="{ClientiModel>email}" maxLength="30" valueStateText="il campo non può essere vuoto" editable="false" />
+                                    <Input id="email" type="Email" maxLength="30" valueStateText="il campo non può essere vuoto" editable="true" />
                                 </f:fields>
                             </f:FormElement>
 
-                            <f:FormElement label="Cellulare">
+                            <f:FormElement label="Telefono">
                                 <f:fields>
-                                    <Input id="telefono" type="Number" value="{ClientiModel>cellulare}" valueStateText="il campo non può essere vuoto" editable="false" />
-                                </f:fields>
-                            </f:FormElement>
-
-                            <f:FormElement label="stato" id="fieldStato" visible="true">
-                                <f:fields>
-                                   <ObjectStatus id="stato" text="{= ${ClientiModel>stato} ? 'Attivo' : 'Inattivo'}" inverted="true" state="{= ${ClientiModel>stato} ? 'Success' : 'Error'}" />
-                                </f:fields>
-                            </f:FormElement>
-
-                           <f:FormElement label="stato" id="fieldSlider" visible="false">
-                                <f:fields>
-                                    <Switch type="AcceptReject" id="slider" state="{= ${ClientiModel>stato} ? true : false}">
-                                        <layoutData>
-                                            <FlexItemData growFactor="1" />
-                                        </layoutData>
-                                    </Switch>
-                                </f:fields>
-                            </f:FormElement>
-
-                            <f:FormElement label="Data di Attivazione">
-                                <f:fields>
-                                    <Input id="dataAttivazione" type="Text" value="{ClientiModel>dataAttivazione}" maxLength="30" valueStateText="il campo non può essere vuoto" editable="false" />
+                                    <Input id="telefono" type="Text" valueStateText="il campo non può essere vuoto" editable="true" />
                                 </f:fields>
                             </f:FormElement>
                         </f:formElements>
@@ -115,13 +105,13 @@
             </f:Form>
 
             <!-- sezione note (icon tab)  -->
-            <IconTabBar id="idIconTabBarMulti" expanded="false" class="sapUiResponsiveContentPadding">
+           <IconTabBar id="idIconTabBarMulti" expanded="false" class="sapUiResponsiveContentPadding">
                 <items>
                     <!-- aspetto operativo -->
                     <IconTabFilter icon="sap-icon://accidental-leave" key="operativo">
                         <Text text="Aspetto Operativo" />
                         <!-- form note -->
-                        <f:Form editable="false">
+                        <f:Form editable="true">
                             <f:layout>
                                 <f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="1" emptySpanL="1" emptySpanM="1" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false" />
                             </f:layout>
@@ -131,7 +121,7 @@
                                     <f:formElements>
                                         <f:FormElement label="Note">
                                             <f:fields>
-                                                <TextArea id="noteOperative" value="{ClientiModel>noteOperative}" rows="5" cols="100" editable="false" />
+                                                <TextArea id="noteOperative" rows="4" cols="100"  />
                                             </f:fields>
                                         </f:FormElement>
                                     </f:formElements>
@@ -152,7 +142,7 @@
                                     <f:formElements>
                                         <f:FormElement label="Note">
                                             <f:fields>
-                                                <TextArea id="noteRelazionali" value="{ClientiModel>noteRelazionali}" rows="5" cols="100" editable="false" />
+                                                <TextArea id="noteRelazionali" rows="4" cols="100"   />
                                             </f:fields>
                                         </f:FormElement>
                                     </f:formElements>
@@ -164,12 +154,12 @@
             </IconTabBar>
         </content>
         <footer>
-            <Toolbar>
-                <ToolbarSpacer />
-                <Button id="edit" text="" class="sapUiSmallMarginEnd" icon="sap-icon://edit" press="onEdit" />
-                <Button id="accept" text="" type="Accept" class="sapUiSmallMarginEnd" icon="sap-icon://accept" press="onCheck" />
-                <Button id="reject" text="" type="Reject" class="sapUiSmallMarginEnd" icon="sap-icon://reset" press="onReset" />
-            </Toolbar>
-        </footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				 
+                    <Button id="accept" text="" type="Accept" class="sapUiSmallMarginEnd" icon="sap-icon://accept" press="onCheck" />
+                    <Button id="reject" text="" type="Reject" class="sapUiSmallMarginEnd" icon="sap-icon://reset" press="onReset" />
+			</Toolbar>
+		</footer>
     </Page>
 </mvc:View>

@@ -88,6 +88,9 @@
       "css": [
         {
           "uri": "css/style.css"
+        },
+        {
+          "uri": "css/im.css"
         }
       ]
     },
@@ -115,6 +118,13 @@
           "target": [
             "Targetdettaglio"
           ]
+        },
+        {
+          "name": "Routeclientenuovo",
+          "pattern": "creacliente",
+          "target": [
+            "Targetclientenuovo"
+          ]
         }
       ],
       
@@ -132,6 +142,13 @@
           "clearControlAggregation": false,
           "viewId": "dettaglio",
           "viewName": "dettaglio"
+        },
+        "Targetclientenuovo": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "creacliente",
+          "viewName": "creacliente"
         }
       }
     },

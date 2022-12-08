@@ -1,38 +1,22 @@
 <mvc:View controllerName="gestioneclienti.gestioneclienti.controller.tabella" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns:m="sap.m" xmlns="sap.ui.table" xmlns:l="sap.ui.layout" xmlns:core='sap.ui.core' xmlns:u="sap.ui.unified">
-    <m:Page showHeader="false">
+    <m:Page showHeader="false" class=".ima">
         <m:content>
             <!-- navbar -->
             <m:Toolbar>
                 <m:content>
-                    <!-- bottone indietro -->
-                    <m:Button text="" icon="sap-icon://nav-back" press="onPress" width="auto" class="sapUiLargeMarginEnd" />
-                    <!-- bottone aggiungi scheda cliente -->
-                    <m:Button text="" icon="sap-icon://add" press="onPress" width="auto" />
+                    <!-- bottone aggiungi cliente -->
+                    <m:Button text="Aggiungi Cliente" icon="sap-icon://add" press="clienteNuovo" width="auto" class="sapUiLargeMarginEnd" />
                     <!-- spaziatura -->
-                    <m:ToolbarSpacer width="45%" />
+                    <m:ToolbarSpacer width="65%" />
                     <!-- checkbox inattivi -->
-                    <m:CheckBox text="Includi clienti inattivi" selected="true" class="sapUiMediumMarginEnd" />
-                    <!-- ordina(select) -->
-                    <m:Label text="ordina" labelFor="ordina"  />
-                    <m:Select id="ordina" width="10%">
-                        <m:items>
-                            <core:Item text="recenti" key="recenti"  />
-                            <core:Item text="meno recenti" key="meno recenti" />
-                        </m:items>
-                    </m:Select>
+                    <!-- <m:CheckBox id="checkbox" text="Includi clienti inattivi" selected="false" class="sapUiMediumMarginEnd" select="filtroInattivi" /> -->
                     <!-- barra di ricerca -->
-                    <m:SearchField width="15%" search="handleLiveChange" />
+                    <m:SearchField width="20%" search="handleLiveChange" />
                 </m:content>
             </m:Toolbar>
 
             <!-- tabella -->
-            <Table id="table1" rows="{ClientiModel>/clienti}" 
-            alternateRowColors="true"  
-            selectionMode = "Single"  
-            rowSelectionChange = "action"
-            visibleRowCount="7"
-            >
-
+            <Table id="table1" rows="{ClientiModel>/clienti}" alternateRowColors="true" selectionMode="Single" rowSelectionChange="action" visibleRowCount="15">
                 <Column>
                     <m:Label text="Assistito" />
                     <template>
@@ -70,13 +54,19 @@
                         </m:VBox>
                     </template>
                 </Column>
-                <Column width="6rem">
+                <Column width="6rem" id="stato">
                     <m:Label text="Stato" />
                     <template>
-                        <m:ObjectStatus id="idStato" text="{= ${ClientiModel>stato} ? 'Attivo' : 'Inattivo'}" 
-                        inverted="true"  
-                      state="{= ${ClientiModel>stato} ? 'Success' : 'Error'}"
-                        />
+                        <m:ObjectStatus id="idStato" text="{= ${ClientiModel>stato} ? 'Attivo' : 'Inattivo'}" inverted="true" state="{= ${ClientiModel>stato} ? 'Success' : 'Error'}" />
+                    </template>
+                </Column>
+
+                <Column id="idOrdina" sorted="true" sortProperty="id">
+                    <m:Label text="Data Attivazione" />
+                    <template>
+                        <m:VBox>
+                            <m:Text text="{ClientiModel>dataAttivazione}" wrapping="false" />
+                        </m:VBox>
                     </template>
                 </Column>
                 <Column width="3rem">
@@ -86,8 +76,6 @@
                     </template>
                 </Column>
             </Table>
-
-            <m:Button text="vai al dettaglio" press="vaiAlDettaglio" id="buttonVaiAlDettaglio" />
         </m:content>
     </m:Page>
 </mvc:View>

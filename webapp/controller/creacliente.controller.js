@@ -9,53 +9,20 @@ sap.ui.define([
      */
     function (Controller, MessageToast) {
         "use strict";
-        return Controller.extend("gestioneclienti.gestioneclienti.controller.dettaglio", {
+        return Controller.extend("gestioneclienti.gestioneclienti.controller.creacliente", {
             onInit: function () {
-                var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-                oRouter.getRoute("Routedettaglio").attachMatched(this._onObjectMatched, this);
-
-
-            },
-            _onObjectMatched: function (oEvent) {
-
-                var sObjectId = oEvent.getParameter("arguments").selectedobj;
-                this.getView().bindElement({ path: "/clienti/" + sObjectId, model: "ClientiModel" });
+                
 
             },
             onNavBack: function () {
                 window.history.go(-1);
-            
-             
-               
             },
 
-            // BOTTONI 
-
-            onEdit: function () {
-
-                this.getView().byId("uomo").setEditable(true);
-                this.getView().byId("donna").setEditable(true);
-                this.getView().byId("fieldGenere").setVisible(false);
-                this.getView().byId("fieldRadio").setVisible(true);
-                this.getView().byId("fieldStato").setVisible(false);
-                this.getView().byId("fieldSlider").setVisible(true);
-                this.getView().byId("eta").setEditable(true);
-                this.getView().byId("indirizzo").setEditable(true);
-                this.getView().byId("citta").setEditable(true);
-                this.getView().byId("cap").setEditable(true);
-                this.getView().byId("provincia").setEditable(true);
-                this.getView().byId("referente").setEditable(true);
-                this.getView().byId("email").setEditable(true);
-                this.getView().byId("telefono").setEditable(true);
-                this.getView().byId("noteOperative").setEditable(true);
-                this.getView().byId("noteRelazionali").setEditable(true);
-               
-
-            },
-
+         
             onCheck: function () {
 
                 let view = this.getView();
+                let inputAssistito = view.byId("assistito").getValue();
                 let inputUomo = view.byId("uomo").getSelected(false);
                 let inputDonna = view.byId("donna").getSelected(false);
                 let inputEta = view.byId("eta").getValue();
@@ -66,13 +33,18 @@ sap.ui.define([
                 let inputReferente = view.byId("referente").getValue();
                 let inputEmail = view.byId("email").getValue();
                 let inputTelefono = view.byId("telefono").getValue();
-                let inputNotaOperativa = view.byId("noteOperative").getValue();
-                let inputNotaRelazionale = view.byId("noteRelazionali").getValue();
+                
 
 
-                if (inputUomo == false && inputDonna == false || inputEta == "" || inputIndirizzo == "" || inputCitta == "" || inputCap == "" || inputProvincia == "" || inputReferente == "" || inputEmail == "" || inputTelefono == "") {
+
+                if (inputAssistito == "" || inputUomo == false && inputDonna == false || inputEta == "" || inputIndirizzo == "" || inputCitta == "" || inputCap == "" || inputProvincia == "" || inputReferente == "" || inputEmail == "" || inputTelefono == "") {
 
                     let msgError = "Non puoi salvare, non hai compilato tutti i campi!";
+                    if (inputAssistito == "") {
+                        this.getView().byId("assistito").setValueState(sap.ui.core.ValueState.Error)
+                    } else {
+                        this.getView().byId("assistito").setValueState("None")
+                    }
 
                     if (inputUomo == false && inputDonna == true || inputUomo == true && inputDonna == false) {
                         this.getView().byId("uomo").setValueState("None"),
@@ -125,7 +97,7 @@ sap.ui.define([
                     MessageToast.show(msgError);
 
                 } else {
-
+                    this.getView().byId("assistito").setValueState("None"),
                     this.getView().byId("uomo").setValueState("None"),
                         this.getView().byId("donna").setValueState("None"),
                         this.getView().byId("eta").setValueState("None"),
@@ -139,7 +111,7 @@ sap.ui.define([
 
                     let msgOK = "Modifiche salvate!";
                     MessageToast.show(msgOK);
-
+                    this.getView().byId("assistito").setEditable(false);
                     this.getView().byId("uomo").setEditable(false);
                     this.getView().byId("donna").setEditable(false);
                     this.getView().byId("eta").setEditable(false);
@@ -154,19 +126,18 @@ sap.ui.define([
                     this.getView().byId("noteRelazionali").setEditable(false);
                     this.getView().byId("fieldGenere").setVisible(true);
                     this.getView().byId("fieldRadio").setVisible(false);
-                    this.getView().byId("fieldSlider").setVisible(false);
-                    this.getView().byId("fieldStato").setVisible(true);
+
+
 
                 }
-                
-               
+
             },
 
             onReset: function () {
-
+                this.getView().byId("assistito").setValue("");
                 this.getView().byId("uomo").setSelected(false);
                 this.getView().byId("donna").setSelected(false);
-                this.getView().byId("genere").setValue("");
+                
                 this.getView().byId("eta").setValue("");
                 this.getView().byId("indirizzo").setValue("");
                 this.getView().byId("citta").setValue("");
@@ -178,7 +149,7 @@ sap.ui.define([
                 this.getView().byId("noteOperative").setValue("");
                 this.getView().byId("noteRelazionali").setValue("");
 
-
+                this.getView().byId("assistito").setValueState("None"),
                 this.getView().byId("uomo").setValueState("None");
                 this.getView().byId("donna").setValueState("None");
                 this.getView().byId("eta").setValueState("None"),
@@ -191,24 +162,11 @@ sap.ui.define([
                     this.getView().byId("telefono").setValueState("None");
 
 
-                this.getView().byId("uomo").setEditable(false);
-                this.getView().byId("donna").setEditable(false);
-                this.getView().byId("eta").setEditable(false);
-                this.getView().byId("indirizzo").setEditable(false);
-                this.getView().byId("citta").setEditable(false);
-                this.getView().byId("cap").setEditable(false);
-                this.getView().byId("provincia").setEditable(false);
-                this.getView().byId("referente").setEditable(false);
-                this.getView().byId("email").setEditable(false);
-                this.getView().byId("telefono").setEditable(false);
-                this.getView().byId("noteOperative").setEditable(false);
-                this.getView().byId("noteRelazionali").setEditable(false);
-                this.getView().byId("fieldGenere").setVisible(true);
-                this.getView().byId("fieldRadio").setVisible(false);
+                
 
 
             },
 
         });
 
-    });
+    })
